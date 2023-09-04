@@ -12,13 +12,17 @@ router.get('/', (req, res) => {
 })
 
 router.get('/countires', async (req, res, next) => {
-  const Countries  = mongoose.model('Country', countrySchema)
+  let result
   // let collection = db.collection("countries");
   // let { document } = await collection.find({})
   //     .limit(20);
-
-  const result = await Countries.find().exec()
-  
+  try {
+    const Countries  = mongoose.model('Country', countrySchema)
+    result = await Countries.find().exec()
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
     res.send(result).status(200);
 });
 
