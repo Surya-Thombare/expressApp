@@ -12,7 +12,11 @@ export const InitiateMongoServer = async () => {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
-        });
+        }).then((res) => {
+            console.log(res.json());
+        }).catch((err) => {
+            console.log(err.message);
+        })
         // conn.on('connected', function() {
         //     console.log('database is connected successfully');
         // });
