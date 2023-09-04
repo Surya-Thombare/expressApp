@@ -8,7 +8,7 @@ let conn = mongoose.connection;
 
 export const InitiateMongoServer = async () => {
     try {
-        await mongoose.connect(uri, {
+        mongoose.connect(uri, {
             useUnifiedTopology: true,
             useNewUrlParser: true
         });

@@ -5,10 +5,9 @@ import moment from 'moment';
 import db from "../auth/db.js";
 
 /* GET home page. */
-router.get('/', async (req, res, next) => {
+router.get('/countires', async (req, res, next) => {
   let collection = db.collection("countries");
   let results = await collection.find({})
-      .limit(20)
       .toArray();
   
     res.send(results).status(200);
