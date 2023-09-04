@@ -5,6 +5,10 @@ import moment from 'moment';
 import db from "../auth/db.js";
 
 /* GET home page. */
+router.get('/', (req, res) => {
+  res.send("Health ok")
+})
+
 router.get('/countires', async (req, res, next) => {
   let collection = db.collection("countries");
   let results = await collection.find({})
