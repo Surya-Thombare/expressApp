@@ -1,8 +1,10 @@
 import express from 'express';
 var router = express.Router();
-import Country from "../model/countries.js";
+import Country, { countrySchema }  from "../model/countries.js";
 import moment from 'moment';
 import db from "../auth/db.js";
+import mongoose from 'mongoose';
+
 
 /* GET home page. */
 router.get('/', (req, res) => {
@@ -10,11 +12,14 @@ router.get('/', (req, res) => {
 })
 
 router.get('/countires', async (req, res, next) => {
-  let collection = db.collection("countries");
-  let results = await collection.find({})
-      .toArray();
+  const Countries  = mongoose.model('Country', countrySchema)
+  // let collection = db.collection("countries");
+  // let { document } = await collection.find({})
+  //     .limit(20);
+
+  const result = await Countries.find().exec()
   
-    res.send(results).status(200);
+    res.send(result).status(200);
 });
 
 router.post('/addcountry',async (req, res) => {

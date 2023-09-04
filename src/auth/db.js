@@ -10,7 +10,8 @@ export const InitiateMongoServer = async () => {
     // try {
         mongoose.connect(uri, {
             useUnifiedTopology: true,
-            useNewUrlParser: true
+            useNewUrlParser: true,
+            useCreateIndex: true,
         });
         conn.on('connected', function() {
             console.log('database is connected successfully');

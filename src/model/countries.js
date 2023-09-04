@@ -1,7 +1,7 @@
 import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
-const countrySchema = new Schema({
+export const countrySchema = new Schema({
     countryName: {
     type: String,
     trim: true,
