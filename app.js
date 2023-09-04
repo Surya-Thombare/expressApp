@@ -15,6 +15,7 @@ import logger from 'morgan';
 
 import indexRouter from "./src/routes/index.js";
 import usersRouter from "./src/routes/users.js";
+import FavouriteRouter from "./src/routes/fav.js";
 
 // var indexRouter = require('./src/routes/index');
 // var usersRouter = require('./src/routes/users');
@@ -32,7 +33,8 @@ app.use(cookieParser());
 // app.use(express.static(path.join(__dirname, 'public')));
 // InitiateMongoServer();
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
+app.use('/', FavouriteRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

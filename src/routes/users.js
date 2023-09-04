@@ -1,7 +1,8 @@
 import express from 'express';
 var router = express.Router();
+import mongoose from 'mongoose';
 
-import User from "../model/user.js"
+import User, {userSchema} from "../model/user.js"
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -24,6 +25,22 @@ router.post('/register', async (req, res) => {
   await user.save().then((res) => console.log(res));;
   res.send(user);
 });
+
+router.get('/users/:userId', async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+  let result
+
+  try {
+    const Users  = mongoose.model('User', userSchema)
+    result = await Users.findById(userId).exec()
+    console.log(result, "result");
+  } catch (error) {
+    console.log(error);
+  }
+    res.send(result).status(200);
+
+})
 
 
 export default router;

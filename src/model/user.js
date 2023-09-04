@@ -1,7 +1,7 @@
 import pkg from 'mongoose';
 const { Schema, model } = pkg;
 
-const userSchema = new Schema({
+export const userSchema = new Schema({
   firstName: {
     type: String,
     trim: true,
