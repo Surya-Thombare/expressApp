@@ -7,19 +7,19 @@ const uri = process.env.MONGODB_URL
 let conn = mongoose.connection;
 
 export const InitiateMongoServer = async () => {
-    // try {
+    try {
         mongoose.connect(uri, {
             useUnifiedTopology: true,
             useNewUrlParser: true,
             useCreateIndex: true,
         });
-        conn.on('connected', function() {
-            console.log('database is connected successfully');
-        });
+        // conn.on('connected', function() {
+        //     console.log('database is connected successfully');
+        // });
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
-    // } catch (error) {
-        conn.on('error', console.error.bind(console, 'connection error:'));
-    // }
+    } catch (error) {
+        console.log('error', error );
+    }
 }
 
 export default conn;
