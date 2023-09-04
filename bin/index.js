@@ -4,9 +4,16 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('expressapp:server');
-var http = require('http');
+import { InitiateMongoServer } from "../src/auth/db.js";
+
+// const { InitiateMongoServer } = require('../src/auth/db.js').default
+import app from "../app.js"
+import debug from "debug";
+import http from "http";
+
+// var app = require('../app.js');
+// var debug = require('debug')('expressapp:server');
+// var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -25,8 +32,11 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+
+
 app.listen(port, (err) => {
   if (err) throw err;
+  InitiateMongoServer()
 console.log(`Example app listening on port ${port}`)
 })
 server.on('error', onError);
