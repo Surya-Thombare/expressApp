@@ -13,9 +13,6 @@ router.get('/', (req, res) => {
 
 router.get('/countires', async (req, res, next) => {
   let result
-  // let collection = db.collection("countries");
-  // let { document } = await collection.find({})
-  //     .limit(20);
   try {
     const Countries  = mongoose.model('Country', countrySchema)
     result = await Countries.find().exec()
