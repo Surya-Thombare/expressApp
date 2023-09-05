@@ -4,13 +4,10 @@ import mongoose from 'mongoose';
 
 import Favourite, { favouriteSchema } from "../model/fav.js";
 import User, { userSchema } from "../model/user.js"
-import Country, { countrySchema }  from "../model/countries.js";
+import Country, { countrySchema } from "../model/countries.js";
 
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
-  res.send('respond with a resource');
-});
 
 router.post('/register', async (req, res) => {
 
@@ -36,38 +33,38 @@ router.get('/users/:userId', async (req, res) => {
   const result = {}
   try {
     const Favourite = mongoose.model('Favourite', favouriteSchema)
-    result1 = await Favourite.find({ userId : userId })
+    result1 = await Favourite.find({ userId: userId })
   } catch (error) {
     console.log(error);
   }
 
-  console.log(typeof(result1));
-  
-result1.forEach((item) => {
-  const userId = item.userId;
-  const countryId = mongoose.Types.ObjectId(item.countryId);
+  console.log(typeof (result1));
 
-  if (!result[userId]) {
+  result1.forEach((item) => {
+    const userId = item.userId;
+    const countryId = mongoose.Types.ObjectId(item.countryId);
+
+    if (!result[userId]) {
       result[userId] = [];
-  }
+    }
 
-  result[userId].push(countryId);
-});
+    result[userId].push(countryId);
+  });
 
-// Convert the result object into an array of objects
-const outputArray = Object.entries(result).map(([userId, countryIds]) => ({
-  userId,
-  countryIds,
-}));
-// console.log(outputArray[0]);
+  // Convert the result object into an array of objects
+  const outputArray = Object.entries(result).map(([userId, countryIds]) => ({
+    userId,
+    countryIds,
+  }));
+  // console.log(outputArray[0]);
 
-const countryIdsArray = outputArray[0].countryIds
+  const countryIdsArray = outputArray[0].countryIds
 
-let countriesArray
+  let countriesArray
   try {
-    const Countries  = mongoose.model('Country', countrySchema)
+    const Countries = mongoose.model('Country', countrySchema)
     countriesArray = await Countries.find({
-      _id : countryIdsArray
+      _id: countryIdsArray
     }).exec()
     console.log(countriesArray);
   } catch (error) {
